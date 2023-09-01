@@ -39,7 +39,7 @@ public class Pizza {
     }
 
     public void addExtraToppings(){
-        if(this.isExtraCheeseAdded && !this.isExtraToppingsAdded) {
+        if(!this.isExtraToppingsAdded) {
             this.isExtraToppingsAdded = true;
         }
     }
