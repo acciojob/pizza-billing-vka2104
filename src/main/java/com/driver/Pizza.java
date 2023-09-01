@@ -8,6 +8,7 @@ public class Pizza {
     private boolean isExtraCheeseAdded = false;
     private boolean isExtraToppingsAdded = false;
     private boolean isPperBagAdded = false;
+    private boolean isBillGenerated = false;
     private int extraCheesePrice;
     private int extraToppingsPrice;
     private int paperBagPrice;
@@ -51,25 +52,27 @@ public class Pizza {
     }
 
     public String getBill(){
-        int totalPrice = 0;
+        if(!this.isBillGenerated) {
+            int totalPrice = 0;
+            this.bill += "Base Price Of The Pizza: "+this.price+"\n";
+            totalPrice += this.price;
 
-        this.bill += "Base Price Of The Pizza: "+this.price+"\n";
-        totalPrice += this.price;
-
-        if(this.isExtraCheeseAdded) {
-            this.bill += "Extra Cheese Added: "+this.extraCheesePrice+"\n";
-            totalPrice += this.extraCheesePrice;
+            if(this.isExtraCheeseAdded) {
+                this.bill += "Extra Cheese Added: "+this.extraCheesePrice+"\n";
+                totalPrice += this.extraCheesePrice;
+            }
+            if(this.isExtraToppingsAdded) {
+                this.bill += "Extra Toppings Added: "+this.extraToppingsPrice+"\n";
+                totalPrice += this.extraToppingsPrice;
+            }
+            if( this.isPperBagAdded) {
+                this.bill += "Paperbag Added: "+this.paperBagPrice+"\n";
+                totalPrice += this.paperBagPrice;
+            }
+            this.bill += "Total Price: "+totalPrice+"\n";
+            this.isBillGenerated = true;
+            return this.bill;
         }
-        if(this.isExtraToppingsAdded) {
-            this.bill += "Extra Toppings Added: "+this.extraToppingsPrice+"\n";
-            totalPrice += this.extraToppingsPrice;
-        }
-        if( this.isPperBagAdded) {
-            this.bill += "Paperbag Added: "+this.paperBagPrice+"\n";
-            totalPrice += this.paperBagPrice;
-        }
-
-        this.bill += "Total Price: "+totalPrice+"\n";
-        return this.bill;
+        return "";
     }
 }
