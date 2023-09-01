@@ -5,9 +5,26 @@ public class Pizza {
     private int price;
     private Boolean isVeg;
     private String bill;
+    private boolean isExtraCheeseAdded = false;
+    private boolean isExtraToppingsAdded = false;
+    private boolean isPperBagAdded = false;
+    private int extraCheesePrice;
+    private int extraToppingsPrice;
+    private int paperBagPrice;
+
 
     public Pizza(Boolean isVeg){
         this.isVeg = isVeg;
+        if(this.isVeg) {
+            this.price = 300;
+            this.extraToppingsPrice = 70;
+        } else {
+            this.extraToppingsPrice = 120;
+            this.price = 400;
+        }
+        this.extraCheesePrice = 80;
+        this.paperBagPrice = 20;
+        this.bill = "";
         // your code goes here
     }
 
@@ -16,19 +33,43 @@ public class Pizza {
     }
 
     public void addExtraCheese(){
-        // your code goes here
+        if(!this.isExtraCheeseAdded) {
+            this.isExtraCheeseAdded = true;
+        }
     }
 
     public void addExtraToppings(){
-        // your code goes here
+        if(this.isExtraCheeseAdded && !this.isExtraToppingsAdded) {
+            this.isExtraToppingsAdded = true;
+        }
     }
 
     public void addTakeaway(){
-        // your code goes here
+        if(!this.isPperBagAdded) {
+            this.isPperBagAdded = true;
+        }
     }
 
     public String getBill(){
-        // your code goes here
+        int totalPrice = 0;
+
+        this.bill += "Base Price Of The Pizza: "+this.price+"\n";
+        totalPrice += this.price;
+
+        if(this.isExtraCheeseAdded) {
+            this.bill += "Extra Cheese Added: "+this.extraCheesePrice+"\n";
+            totalPrice += this.extraCheesePrice;
+        }
+        if(this.isExtraToppingsAdded) {
+            this.bill += "Extra Toppings Added: "+this.extraToppingsPrice+"\n";
+            totalPrice += this.extraToppingsPrice;
+        }
+        if( this.isPperBagAdded) {
+            this.bill += "Paperbag Added: "+this.paperBagPrice+"\n";
+            totalPrice += this.paperBagPrice;
+        }
+
+        this.bill += "Total Price: "+totalPrice;
         return this.bill;
     }
 }
